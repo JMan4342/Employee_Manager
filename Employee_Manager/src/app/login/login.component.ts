@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, afterRender } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -21,15 +21,26 @@ import { LoginService } from './login.service';
   styleUrl: './login.component.css',
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   userName: string = '';
   password: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) {    
+  constructor(private loginService: LoginService, private router: Router) {     
+    afterRender(() => {
+      localStorage.removeItem('Employee Token');
+    })   
+  }
+
+  ngOnInit() {   
+    // this.resetLocalStorage(); 
+  }
+
+  resetLocalStorage() {
+    // localStorage.removeItem('Employee Token');
   }
 
   getAuth() {
-    localStorage.setItem('token', '1');
+    localStorage.setItem('Employee Token', '1');
     this.router.navigate(['/home']);
   }
 }
