@@ -1,12 +1,10 @@
 <div class="position-absolute top-50 start-50 translate-middle h-75">
   <div class="card flex justify-center text-center">
-    <div class="card-header" style="background-color: #6f6fab;">
-      <h5 style="color: whitesmoke;">Login</h5>
+    <div class="card-header" style="background-color: #6f6fab">
+      <h5 style="color: whitesmoke">Login</h5>
     </div>
-    <div class="card-body" style="background-color: #d1ccc2;">
-      <p class="card-text">
-        Enter your username and password.
-      </p>
+    <div class="card-body" style="background-color: #d1ccc2">
+      <p class="card-text">Enter your username and password.</p>
       <div class="mb-1">
         <input
           type="text"
@@ -17,7 +15,7 @@
           style="width: 15rem"
         />
       </div>
-      <div>
+      <div class="mb-1">
         <p-password
           [(ngModel)]="password"
           [toggleMask]="true"
@@ -25,6 +23,17 @@
           [feedback]="false"
           placeholder="Password"
           [inputStyle]="{ width: '15rem' }"
+        />
+      </div>
+      <div>
+        <p-button
+          label="Login"
+          [style]="{
+            'background-color': 'forestgreen',
+            'border-color': 'forestgreen'
+          }"
+          [raised]="true"
+          (onClick)="getAuth()"
         />
       </div>
     </div>
