@@ -1,2 +1,17 @@
-<p-menubar [model]="navbarItems" /> 
+<div class="card">
+  <p-menubar [model]="navbarItems">
+    <ng-template #start></ng-template>
+    <ng-template #end>
+      <div class="flex items-center gap-2">
+        <p-menu #menu [model]="avatarMenuItems" [popup]="true" />
+        <p-button (click)="menu.toggle($event)">
+          <p-avatar
+            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            shape="circle"
+          />
+        </p-button>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>
 <router-outlet></router-outlet>
