@@ -4,12 +4,14 @@
     <ng-template #end>
       <div class="flex items-center gap-2">
         <p-menu #menu [model]="avatarMenuItems" [popup]="true" />
-        <p-button (click)="menu.toggle($event)">
+        <!-- <p-button (click)="menu.toggle($event)"> -->
           <p-avatar
-            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            icon="fa-solid fa-user"
             shape="circle"
+            (click)="menu.toggle($event)"
+            [style]="{'cursor': 'pointer'}"
           />
-        </p-button>
+        <!-- </p-button> -->
       </div>
     </ng-template>
   </p-menubar>
