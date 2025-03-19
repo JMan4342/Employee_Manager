@@ -2,6 +2,7 @@ var dotenv = require("dotenv");
 const express = require("express");
 const mongodb = require("mongodb");
 const { MongoClient, ObjectId } = require("mongodb");
+const jwt = require('jsonwebtoken');
 const UserLogin = require("../models/userLogin");
 
 if (process.env.NODE_ENV != "production") {
@@ -71,6 +72,18 @@ userLoginRouter.post("/addUserLogin", async (req, res) => {
       .send(error instanceof Error ? error.message : "Unknown error");
   }
 });
+
+userLoginRouter.post("/login", async (req, res) => {
+    const query = { Username: req.body.Username, Password: req.body.Password };
+    console.log(query);
+    const user = await userLoginCollection.findOne(query);
+    if (!user) {
+        return res.status(422).json({ error: "Incorrect username or password" });
+    } else {
+        const token = jwt.sign({ id: user._id, username: user.Username }, 'secretsquirrel');
+        res.status(200).send(token);
+    }
+})
 
 userLoginRouter.put("/updateUserLogin/:id", async (req, res) => {
   try {
