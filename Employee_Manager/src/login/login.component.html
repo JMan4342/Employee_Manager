@@ -10,36 +10,38 @@
       <div class="align-middle mt-1 mb-2" style="height: 1rem">
         <p class="fw-semibold text-danger m-0">{{loginMessage.length > 0 ? loginMessage : ""}}</p>
       </div>
-      <div class="mb-1">
-        <input
-          type="text"
-          pInputText
-          [(ngModel)]="userName"
-          inputId="username"
-          placeholder="Username"
-          style="width: 15rem"
-        />
-      </div>
-      <div class="mb-2">
-        <p-password
-          [(ngModel)]="password"
-          [toggleMask]="true"
-          inputId="password"
-          [feedback]="false"
-          placeholder="Password"
-          [inputStyle]="{ width: '15rem' }"
-        />
-      </div>
-      <div>
-        <p-button
-          label="Login"
-          [style]="{
-            'background-color': 'forestgreen',
-            'border-color': 'forestgreen'
-          }"
-          [raised]="true"
-          (onClick)="login()"
-        />
+      <div (keydown.enter)="login()">
+        <div class="mb-1">
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="username"
+            inputId="username"
+            placeholder="Username"
+            style="width: 15rem"
+          />
+        </div>
+        <div class="mb-2">
+          <p-password
+            [(ngModel)]="password"
+            [toggleMask]="true"
+            inputId="password"
+            [feedback]="false"
+            placeholder="Password"
+            [inputStyle]="{ width: '15rem' }"
+          />
+        </div>
+        <div>
+          <p-button
+            label="Login"
+            [style]="{
+              'background-color': 'forestgreen',
+              'border-color': 'forestgreen'
+            }"
+            [raised]="true"
+            (onClick)="login()"
+          />
+        </div>
       </div>
     </div>
   </div>

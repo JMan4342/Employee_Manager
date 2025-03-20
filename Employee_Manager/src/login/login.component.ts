@@ -17,13 +17,13 @@ import { LoginService } from './login.service';
     PasswordModule,
     FormsModule,
     FloatLabelModule,
-    ButtonModule,
+    ButtonModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
-  userName: string = '';
+  username: string = '';
   password: string = '';
   loginMessage: string = '';
 
@@ -43,7 +43,8 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.loginMessage = '';
-    this.loginService.loginUser(this.userName, this.password).subscribe({
+
+    this.loginService.loginUser(this.username, this.password).subscribe({
       next: (results) => {
         console.log(results);
           this.getAuth(results);
