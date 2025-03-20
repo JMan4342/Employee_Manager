@@ -79,6 +79,8 @@ userLoginRouter.post("/login", async (req, res) => {
     const user = await userLoginCollection.findOne(query);
     if (!user) {
         return res.status(422).json({ error: "Incorrect username or password" });
+    } else if (user && user.AccessLevel < 3 && !user.ITAccess) {
+        return res.status(422).json({ error: "Not authorized to access" });
     } else {
         const token = jwt.sign({ id: user._id, username: user.Username }, 'secretsquirrel');
         res.status(200).send(token);

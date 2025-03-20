@@ -20,23 +20,31 @@ import { LoginService } from './login.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   userName: string = '';
   password: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) {     
+  constructor(private loginService: LoginService, private router: Router) {
     afterRender(() => {
       localStorage.removeItem('Employee Token');
-    })   
+    });
   }
 
-  ngOnInit() {   
-    // this.resetLocalStorage(); 
+  ngOnInit() {
+    // this.resetLocalStorage();
   }
 
   resetLocalStorage() {
     // localStorage.removeItem('Employee Token');
+  }
+
+  login(): void {
+    this.loginService.loginUser(this.userName, this.password).subscribe({
+      next: (results) => {
+        console.log(results);
+      },
+      error: (err) => console.log(err),
+    });
   }
 
   getAuth() {

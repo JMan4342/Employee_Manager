@@ -6,12 +6,16 @@ import Aura from '@primeng/themes/aura';
 
 import { routes } from '../navbar/app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
+    provideHttpClient(withFetch()),
+    provideAnimations(),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
