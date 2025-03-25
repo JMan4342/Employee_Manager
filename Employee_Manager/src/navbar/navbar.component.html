@@ -1,21 +1,16 @@
-<!-- <div class="card"> -->
 <p-menubar [model]="navbarItems">
-  <ng-template #start></ng-template>
+  <ng-template #start let-navbarItem>
+  </ng-template>
   <ng-template #end>
     <div class="flex items-center gap-2">
       <p-menu #menu [model]="avatarMenuItems" [popup]="true" />
-      <!-- <p-button (click)="menu.toggle($event)"> -->
       <p-avatar
         icon="fa-solid fa-user"
         shape="circle"
         (click)="menu.toggle($event)"
         [style]="{ cursor: 'pointer' }"
       />
-      <!-- </p-button> -->
     </div>
   </ng-template>
 </p-menubar>
-<!-- </div> -->
-<!-- <div class="justify-center" style="height: 90vh"> -->
 <router-outlet></router-outlet>
-<!-- </div> -->

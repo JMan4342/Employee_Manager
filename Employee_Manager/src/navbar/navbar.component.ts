@@ -24,6 +24,17 @@ export class NavbarComponent implements OnInit{
     this.navbarItems = [
       {
         label: 'Home',
+        // route: '/home'
+        command: () => {
+          this.router.navigate(['/home']);
+        }
+      },
+      {
+        label: 'Employees',
+        // route: '/employees'
+        command: () => {
+          this.router.navigate(['/employees']);
+        }
       }
     ];
     this.avatarMenuItems = [
