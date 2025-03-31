@@ -8,7 +8,11 @@
   <p-tabpanels>
     <p-tabpanel value="0">
       <div class="mx-2 d-flex align-items-center justify-content-end">
-        <p-button class="mx-2" label="Add Employee" />
+        <p-button
+          class="mx-2"
+          label="Add Employee"
+          (onClick)="openEmpForm('New')"
+        />
         <input
           type="text"
           pInputText
@@ -39,3 +43,9 @@
     </p-tabpanel>
   </p-tabpanels>
 </p-tabs>
+
+<!-- Modals -->
+<p-dialog [modal]="true" [(visible)]="modalVisible">
+  <ng-template #header>{{formState}} Employee Form</ng-template>
+  <app-employee-form></app-employee-form>
+</p-dialog>
