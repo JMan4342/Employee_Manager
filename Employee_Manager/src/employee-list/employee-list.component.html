@@ -31,6 +31,14 @@
       </p>
     </p-tabpanel>
     <p-tabpanel value="1">
+      <div class="mx-2 d-flex align-items-center justify-content-end">
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="searchTerm"
+          placeholder="Search"
+        />
+      </div>
       <p class="m-0">
         Sed ut perspiciatis unde omnis iste natus error sit voluptatem
         accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
@@ -46,6 +54,6 @@
 
 <!-- Modals -->
 <p-dialog [modal]="true" [(visible)]="modalVisible">
-  <ng-template #header>{{formState}} Employee Form</ng-template>
+  <ng-template #header>{{ formState }} Employee Form</ng-template>
   <app-employee-form></app-employee-form>
 </p-dialog>
