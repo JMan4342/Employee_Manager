@@ -1,3 +1,23 @@
 <div>
-    <p>employee-form works!</p>
+    <p-iftalabel>
+        <input pInputText id="firstName" [(ngModel)]="employee.FirstName" />
+        <label for="firstName">First Name</label>
+    </p-iftalabel>
+    <p-iftalabel>
+        <input pInputText id="lastName" [(ngModel)]="employee.LastName" />
+        <label for="lastName">Last Name</label>
+    </p-iftalabel>
+    <p-select [options]="tempPosition" [(ngModel)]="employee.Position" placeholder="Select a Position" appendTo="body" class="w-full md:w-56" />
+    <p-iftalabel>
+        <input pInputText id="jobTitle" [(ngModel)]="employee.Title" />
+        <label for="jobTitle">Job Title</label>
+    </p-iftalabel>
+    <p-select [options]="tempManager" [(ngModel)]="employee.Manager" placeholder="Select Manager" appendTo="body" class="w-full md:w-56" />
+    <p-select [options]="tempAccessLvl" [(ngModel)]="employee.AccessLevel" placeholder="Select Access Level" appendTo="body" class="w-full md:w-56" />
+    <p-datepicker [(ngModel)]="employee.StartDate" appendTo="body"/>
+    <p-button
+          class="mx-2"
+          label="Save"
+          (onClick)="saveEmployee()"
+        />
 </div>
