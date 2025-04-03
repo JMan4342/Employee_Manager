@@ -53,7 +53,16 @@
 </p-tabs>
 
 <!-- Modals -->
-<p-dialog [modal]="true" [(visible)]="modalVisible">
-  <ng-template #header>{{ formState }} Employee Form</ng-template>
+<p-dialog
+  [modal]="true"
+  [(visible)]="modalVisible"
+  [contentStyle]="{
+    'background-color': 'whitesmoke',
+    'border-radius': '0 0 12px 12px'
+  }"
+  [styleClass]="'custom-employeeForm-header'"
+>
+  <ng-template #header>{{ formState }} Employee Form</ng-template
+  >
   <app-employee-form></app-employee-form>
 </p-dialog>

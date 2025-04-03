@@ -1,0 +1,7 @@
+:host ::ng-deep .custom-employeeForm-header .p-dialog-header {
+    background-color: #3c6d89;
+    border-radius: 12px 12px 0 0;
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+  }
