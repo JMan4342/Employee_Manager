@@ -1,5 +1,5 @@
 export class Employee {
-    Id: number | null = null;
+    EmpId: number | null = null;
     FirstName: string | undefined = undefined;
     LastName: string | undefined = undefined;
     AccessLevel: number | null = null;

@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 var port = process.env.PORT || 8080;
 var userLoginRoutes = require("./routes/userLoginRoute");
+var employeeProfileRoutes = require("./routes/employeeProfileRoute");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // );
 
 app.use("/api/userLogins", userLoginRoutes);
+app.use("/api/employeeProfiles", employeeProfileRoutes);
 
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
