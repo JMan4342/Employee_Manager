@@ -15,6 +15,9 @@ const EmployeeProfileSchema = mongoose.Schema ({
   LastName: {
     type: String,
   },
+  FullName: {
+    type: String,
+  },
   AccessLevel: {
     type: Number,
   },

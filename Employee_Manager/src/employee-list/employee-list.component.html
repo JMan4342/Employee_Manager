@@ -7,28 +7,47 @@
   </div>
   <p-tabpanels>
     <p-tabpanel value="0">
-      <div class="mx-2 d-flex align-items-center justify-content-end">
-        <p-button
-          class="mx-2"
-          label="Add Employee"
-          (onClick)="openEmpForm('New')"
-        />
-        <input
-          type="text"
-          pInputText
-          [(ngModel)]="searchTerm"
-          placeholder="Search"
-        />
-      </div>
-      <p class="m-0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
+      <p-table
+        [columns]="cols"
+        [value]="employeeList"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template #header let-columns>
+          <tr>
+            <th *ngFor="let col of columns">
+              {{ col.header }}
+            </th>
+            <th>
+              <div class="mx-2 d-flex align-items-center justify-content-end">
+                <p-button
+                  class="mx-2"
+                  label="Add Employee"
+                  (onClick)="openEmpForm('New')"
+                />
+                <input
+                  type="text"
+                  pInputText
+                  [(ngModel)]="searchTerm"
+                  placeholder="Search"
+                />
+              </div>        
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+              <div *ngIf="col.field != 'StartDate'">
+                {{ rowData[col.field] }}
+              </div>
+              <div *ngIf="col.field == 'StartDate'">
+                {{ rowData[col.field] | date }}
+              </div>
+            </td>
+            <td colspan="1"></td>
+          </tr>
+        </ng-template>
+      </p-table>
     </p-tabpanel>
     <p-tabpanel value="1">
       <div class="mx-2 d-flex align-items-center justify-content-end">
@@ -62,7 +81,6 @@
   }"
   [styleClass]="'custom-employeeForm-header'"
 >
-  <ng-template #header>{{ formState }} Employee Form</ng-template
-  >
+  <ng-template #header>{{ formState }} Employee Form</ng-template>
   <app-employee-form></app-employee-form>
 </p-dialog>

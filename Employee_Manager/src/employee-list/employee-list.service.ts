@@ -13,9 +13,7 @@ export class EmployeeListService {
 
   getEmployees(): Observable<any> {
     return this.http
-      .get(`${this.apiUrl}api/employeeProfiles/getEmployeeProfiles`, {
-        responseType: 'text',
-      })
+      .get(`${this.apiUrl}api/employeeProfiles/getEmployeeProfiles`)
       .pipe(
         map((result) => {
           return result;
@@ -28,6 +26,7 @@ export class EmployeeListService {
       EmpId: employee.EmpId,
       FirstName: employee.FirstName,
       LastName: employee.LastName,
+      FullName: employee.FullName,
       AccessLevel: employee.AccessLevel,
       Manager: employee.Manager,
       Position: employee.Position,

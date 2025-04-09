@@ -44,7 +44,7 @@ export class EmployeeFormComponent {
 
   addEmployee(): void {
     console.log(this.employee);
-    
+    this.employee.FullName = this.employee.LastName + ', ' + this.employee.FirstName;    
 
     this.employeeListService.addEmployee(this.employee).subscribe({
       next: (results) => {
