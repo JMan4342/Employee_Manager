@@ -6,6 +6,7 @@ import { IftaLabelModule } from 'primeng/iftalabel';
 import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
+import { EmployeeListService } from '../../employee-list.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -39,10 +40,18 @@ export class EmployeeFormComponent {
     'Associate',
   ];
 
-  constructor() {}
+  constructor(private employeeListService: EmployeeListService) {}
 
-  saveEmployee(): void {
+  addEmployee(): void {
     console.log(this.employee);
-    this.employee = new Employee;
+    
+
+    this.employeeListService.addEmployee(this.employee).subscribe({
+      next: (results) => {
+        console.log(results);
+        this.employee = new Employee;
+      },
+      error: (err) => console.log(err),      
+    });
   }
 }
