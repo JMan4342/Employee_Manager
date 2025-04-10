@@ -84,4 +84,12 @@ export class EmployeeListComponent {
     this.modalVisible = true;
     this.formState = state;
   }
+
+  editEmployee(employee: Employee): void {
+    console.log("Edit Employee Clicked", employee);
+  }
+
+  archiveEmployee(employee: Employee): void {
+    console.log("Archive Employee Clicked", employee);
+  }
 }
