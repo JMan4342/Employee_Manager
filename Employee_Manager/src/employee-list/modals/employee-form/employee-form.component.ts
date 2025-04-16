@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Employee } from '../../../shared/classes/employee';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { IftaLabelModule } from 'primeng/iftalabel';
@@ -26,6 +26,9 @@ import { LoginService } from '../../../login/login.service';
   styleUrl: './employee-form.component.css',
 })
 export class EmployeeFormComponent {
+  @Output() outModalState = new EventEmitter<number>();
+  @Output() outModalVisible = new EventEmitter<boolean>();
+
   employee: Employee = new Employee();
   login: Login = new Login();
 
@@ -72,6 +75,7 @@ export class EmployeeFormComponent {
         console.log(results);
         this.employee = new Employee();
         this.createEmpLogin();
+        this.closeModal();
       },
       error: (err) => console.log(err),
     });
@@ -84,5 +88,10 @@ export class EmployeeFormComponent {
       },
       error: (err) => console.log(err),
     });
+  }
+
+  closeModal(): void {
+    this.outModalState.emit(0);
+    this.outModalVisible.emit(false);
   }
 }

@@ -40,6 +40,7 @@ export class EmployeeListComponent {
   activeValue: number = 0;
   value: number = 0;
   modalVisible: boolean = false;
+  modalShown: number = 0;
   formState: string | undefined = undefined;
 
   cols: Column[] = [];
@@ -82,6 +83,7 @@ export class EmployeeListComponent {
 
   openEmpForm(state: string): void {
     this.modalVisible = true;
+    this.modalShown = 1;
     this.formState = state;
   }
 

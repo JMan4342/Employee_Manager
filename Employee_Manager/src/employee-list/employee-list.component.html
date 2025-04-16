@@ -105,5 +105,9 @@
   [styleClass]="'custom-employeeForm-header'"
 >
   <ng-template #header>{{ formState }} Employee Form</ng-template>
-  <app-employee-form></app-employee-form>
+  <app-employee-form
+    *ngIf="modalShown == 1"
+    (outModalState)="modalShown = $event"
+    (outModalVisible)="modalVisible = $event"
+  ></app-employee-form>
 </p-dialog>
