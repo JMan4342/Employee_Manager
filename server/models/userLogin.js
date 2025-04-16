@@ -6,7 +6,7 @@ const UserLoginSchema = mongoose.Schema ({
     type: mongodb.ObjectId,
     required: true
   },
-  empId: {
+  EmpId: {
     type: Number,
   },
   Username: {

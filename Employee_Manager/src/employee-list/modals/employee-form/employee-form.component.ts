@@ -7,6 +7,8 @@ import { SelectModule } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
 import { EmployeeListService } from '../../employee-list.service';
+import { Login } from '../../../shared/classes/login';
+import { LoginService } from '../../../login/login.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -18,13 +20,14 @@ import { EmployeeListService } from '../../employee-list.service';
     IftaLabelModule,
     SelectModule,
     ButtonModule,
-    DatePickerModule
+    DatePickerModule,
   ],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.css',
 })
 export class EmployeeFormComponent {
   employee: Employee = new Employee();
+  login: Login = new Login();
 
   // PLACEHOLDERS FOR DROPDOWNS
   tempAccessLvl: number[] = [1, 2, 3, 4, 5, 6];
@@ -40,18 +43,46 @@ export class EmployeeFormComponent {
     'Associate',
   ];
 
-  constructor(private employeeListService: EmployeeListService) {}
+  constructor(
+    private employeeListService: EmployeeListService,
+    private loginService: LoginService
+  ) {}
 
   addEmployee(): void {
     console.log(this.employee);
-    this.employee.FullName = this.employee.LastName + ', ' + this.employee.FirstName;    
+    this.employee.FullName =
+      this.employee.LastName + ', ' + this.employee.FirstName;
+
+    let username = '';
+    username = this.employee.FirstName?.slice(0, 3) + this.employee.LastName;
+    username = username.toLowerCase();
+
+    this.login = {
+      EmpId: null,
+      Username: username,
+      Password: 'demo123',
+      AccessLevel: this.employee.AccessLevel,
+      ITAccess: this.employee.Position == 'IT' ? true : false,
+    };
+
+    console.log('Login Info: ', this.login);
 
     this.employeeListService.addEmployee(this.employee).subscribe({
       next: (results) => {
         console.log(results);
-        this.employee = new Employee;
+        this.employee = new Employee();
+        this.createEmpLogin();
       },
-      error: (err) => console.log(err),      
+      error: (err) => console.log(err),
+    });
+  }
+
+  createEmpLogin(): void {
+    this.loginService.addUserLogin(this.login).subscribe({
+      next: (results) => {
+        console.log(results);
+      },
+      error: (err) => console.log(err),
     });
   }
 }
