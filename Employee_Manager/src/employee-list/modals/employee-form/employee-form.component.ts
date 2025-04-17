@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Employee } from '../../../shared/classes/employee';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { IftaLabelModule } from 'primeng/iftalabel';
@@ -26,6 +26,8 @@ import { LoginService } from '../../../login/login.service';
   styleUrl: './employee-form.component.css',
 })
 export class EmployeeFormComponent {
+  @Input() inFormState: string = '';
+  @Input() inEmployee: Employee = new Employee();
   @Output() outModalState = new EventEmitter<number>();
   @Output() outModalVisible = new EventEmitter<boolean>();
 
@@ -50,6 +52,12 @@ export class EmployeeFormComponent {
     private employeeListService: EmployeeListService,
     private loginService: LoginService
   ) {}
+
+  ngOnInit() {
+    if (this.inFormState == 'Edit') {
+      this.employee = this.inEmployee;
+    };
+  }
 
   addEmployee(): void {
     console.log(this.employee);

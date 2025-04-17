@@ -35,13 +35,14 @@ interface Column {
   styleUrl: './employee-list.component.css',
 })
 export class EmployeeListComponent {
+  editEmployee: Employee = new Employee;
   employeeList: Employee[] = [];
   searchTerm: string | undefined = undefined;
   activeValue: number = 0;
   value: number = 0;
   modalVisible: boolean = false;
   modalShown: number = 0;
-  formState: string | undefined = undefined;
+  formState: string = '';
 
   cols: Column[] = [];
 
@@ -87,8 +88,12 @@ export class EmployeeListComponent {
     this.formState = state;
   }
 
-  editEmployee(employee: Employee): void {
+  updateEmployee(state: string, employee: Employee): void {
     console.log("Edit Employee Clicked", employee);
+    if (state == 'Edit') {
+      this.editEmployee = employee;
+    };
+    this.openEmpForm('Edit');
   }
 
   archiveEmployee(employee: Employee): void {

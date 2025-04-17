@@ -54,7 +54,7 @@
                 size="small"
                 pTooltip="Edit Employee"
                 tooltipPosition="top"
-                (onClick)="editEmployee(rowData)"
+                (onClick)="updateEmployee('Edit', rowData)"
               />
               <p-button
                 class="mx-1"
@@ -107,6 +107,8 @@
   <ng-template #header>{{ formState }} Employee Form</ng-template>
   <app-employee-form
     *ngIf="modalShown == 1"
+    [inFormState]="formState"
+    [inEmployee]="editEmployee"
     (outModalState)="modalShown = $event"
     (outModalVisible)="modalVisible = $event"
   ></app-employee-form>
