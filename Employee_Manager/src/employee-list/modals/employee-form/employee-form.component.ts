@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Employee } from '../../../shared/classes/employee';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { IftaLabelModule } from 'primeng/iftalabel';
@@ -25,7 +32,7 @@ import { LoginService } from '../../../login/login.service';
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.css',
 })
-export class EmployeeFormComponent {
+export class EmployeeFormComponent implements OnChanges {
   @Input() inFormState: string = '';
   @Input() inEmployee: Employee = new Employee();
   @Output() outModalState = new EventEmitter<number>();
@@ -53,10 +60,22 @@ export class EmployeeFormComponent {
     private loginService: LoginService
   ) {}
 
-  ngOnInit() {
+  ngOnChanges() {
     if (this.inFormState == 'Edit') {
       this.employee = this.inEmployee;
-    };
+      this.employee.StartDate = new Date(this.employee.StartDate);
+    } else {
+      this.employee = new Employee();
+    }
+  }
+
+  saveEmployee(): void {
+    if (this.inFormState == 'New') {
+      this.addEmployee();
+    }
+    if (this.inFormState == 'Edit') {
+      this.updateEmployee();
+    }
   }
 
   addEmployee(): void {
@@ -93,6 +112,20 @@ export class EmployeeFormComponent {
     this.loginService.addUserLogin(this.login).subscribe({
       next: (results) => {
         console.log(results);
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
+  updateEmployee(): void {
+    this.employee.FullName =
+      this.employee.LastName + ', ' + this.employee.FirstName;
+
+    this.employeeListService.updateEmployee(this.employee).subscribe({
+      next: (results) => {
+        console.log(results);
+        this.employee = new Employee();
+        this.closeModal();
       },
       error: (err) => console.log(err),
     });

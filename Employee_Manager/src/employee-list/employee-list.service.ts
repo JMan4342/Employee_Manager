@@ -45,4 +45,33 @@ export class EmployeeListService {
         })
       );
   }
+
+  updateEmployee(employee: Employee): Observable<any> {
+    let employeeBody = {
+      // EmpId: employee.EmpId,
+      FirstName: employee.FirstName,
+      LastName: employee.LastName,
+      FullName: employee.FullName,
+      AccessLevel: employee.AccessLevel,
+      Manager: employee.Manager,
+      Position: employee.Position,
+      Title: employee.Title,
+      Archived: employee.Archived,
+      StartDate: employee.StartDate,
+    };
+
+    return this.http
+      .put(
+        `${this.apiUrl}api/employeeProfiles/updateEmployeeProfile/${employee.EmpId}`,
+        employeeBody,
+        {
+          responseType: 'text',
+        }
+      )
+      .pipe(
+        map((result) => {
+          return result;
+        })
+      );
+  }
 }

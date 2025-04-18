@@ -8,7 +8,7 @@ export class Employee {
     Position: string | undefined = undefined;
     Title: string | undefined = undefined;
     Archived: boolean = false;
-    StartDate: Date | undefined = undefined;
+    StartDate!: Date;
 
     constructor() {
     }

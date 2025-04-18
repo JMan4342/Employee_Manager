@@ -42,7 +42,7 @@ employeeProfileRouter.get("/getEmployeeProfiles", async (_req, res) => {
 employeeProfileRouter.get("/getEmployeeProfile/:id", async (req, res) => {
   try {
     const id = req?.params?.id;
-    const query = { _id: new ObjectId(id) };
+    const query = { EmpId: id };
     const employeeProfile = await employeeProfileCollection.findOne(query);
 
     if (employeeProfile) {
@@ -77,7 +77,7 @@ employeeProfileRouter.put("/updateEmployeeProfile/:id", async (req, res) => {
   try {
     const id = req?.params?.id;
     const employeeProfile = req.body;
-    const query = { _id: new ObjectId(id) };
+    const query = { EmpId: id };
     const result = await employeeProfileCollection.updateOne(query, { $set: employeeProfile });
 
     if (result && result.matchedCount) {
@@ -97,7 +97,7 @@ employeeProfileRouter.put("/updateEmployeeProfile/:id", async (req, res) => {
 employeeProfileRouter.delete("/deleteEmployeeProfile/:id", async (req, res) => {
   try {
     const id = req?.params?.id;
-    const query = { _id: new ObjectId(id) };
+    const query = { EmpId: id };
     const result = await employeeProfileCollection.deleteOne(query);
 
     if (result && result.deletedCount) {
