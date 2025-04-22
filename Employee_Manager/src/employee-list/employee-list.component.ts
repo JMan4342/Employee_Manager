@@ -35,6 +35,9 @@ interface Column {
   styleUrl: './employee-list.component.css',
 })
 export class EmployeeListComponent {
+  activeEmployeeList = this.employeeListService.activeEmployeesSig;
+  archivedEmployeeList = this.employeeListService.archivedEmployeesSig;
+
   editEmployee: Employee = new Employee;
   employeeList: Employee[] = [];
   searchTerm: string | undefined = undefined;
@@ -73,6 +76,7 @@ export class EmployeeListComponent {
       next: (results) => {
         this.employeeList = results;
         console.log(this.employeeList);
+        this.employeeListService.updateEmployeeLists(this.employeeList);
       },
       error: (err) => console.log(err),
     });

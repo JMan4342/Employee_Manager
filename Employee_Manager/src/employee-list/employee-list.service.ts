@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Employee } from '../shared/classes/employee';
 
@@ -7,6 +7,9 @@ import { Employee } from '../shared/classes/employee';
   providedIn: 'root',
 })
 export class EmployeeListService {
+  activeEmployeesSig = signal<Employee[]>([]);
+  archivedEmployeesSig = signal<Employee[]>([]);
+
   private apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) {}
@@ -73,5 +76,13 @@ export class EmployeeListService {
           return result;
         })
       );
+  }
+
+  updateEmployeeLists(employees: Employee[]) {
+    let activeEmployees = employees.filter(x => x.Archived == false);
+    let archivedEmployees = employees.filter(x => x.Archived == true);
+
+    this.activeEmployeesSig.set(activeEmployees);
+    this.archivedEmployeesSig.set(archivedEmployees);
   }
 }

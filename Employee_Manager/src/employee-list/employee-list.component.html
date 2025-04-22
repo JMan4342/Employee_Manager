@@ -9,7 +9,7 @@
     <p-tabpanel value="0">
       <p-table
         [columns]="cols"
-        [value]="employeeList"
+        [value]="activeEmployeeList()"
         [tableStyle]="{ 'min-width': '50rem' }"
       >
         <ng-template #header let-columns>
