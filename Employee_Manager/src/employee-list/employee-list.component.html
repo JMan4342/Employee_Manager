@@ -8,7 +8,7 @@
   <p-tabpanels>
     <p-tabpanel value="0">
       <p-table
-        [columns]="cols"
+        [columns]="activeCols"
         [value]="activeEmployeeList()"
         [tableStyle]="{ 'min-width': '50rem' }"
       >
@@ -73,23 +73,54 @@
       </p-table>
     </p-tabpanel>
     <p-tabpanel value="1">
-      <div class="mx-2 d-flex align-items-center justify-content-end">
-        <input
-          type="text"
-          pInputText
-          [(ngModel)]="searchTerm"
-          placeholder="Search"
-        />
-      </div>
-      <p class="m-0">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-        voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non
-        numquam eius modi.
-      </p>
+      <p-table
+        [columns]="archiveCols"
+        [value]="archivedEmployeeList()"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template #header let-columns>
+          <tr>
+            <th *ngFor="let col of columns">
+              {{ col.header }}
+            </th>
+            <th style="width: 1rem">
+              <div class="mx-2 d-flex align-items-center justify-content-end">
+                <input
+                  type="text"
+                  pInputText
+                  [(ngModel)]="searchTerm"
+                  placeholder="Search"
+                />
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-rowData let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns">
+              <div *ngIf="col.field != 'StartDate'">
+                {{ rowData[col.field] }}
+              </div>
+              <div *ngIf="col.field == 'StartDate'">
+                {{ rowData[col.field] | date }}
+              </div>
+            </td>
+            <td colspan="1" class="d-flex justify-content-center">
+              <p-button
+                class="mx-1"
+                icon="fa-solid fa-box-archive"
+                [rounded]="true"
+                [raised]="true"
+                severity="warn"
+                size="small"
+                pTooltip="Archive Employee"
+                tooltipPosition="top"
+                (onClick)="reactivateEmployee(rowData)"
+              />
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </p-tabpanel>
   </p-tabpanels>
 </p-tabs>

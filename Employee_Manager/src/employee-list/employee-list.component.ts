@@ -47,7 +47,8 @@ export class EmployeeListComponent {
   modalShown: number = 0;
   formState: string = '';
 
-  cols: Column[] = [];
+  activeCols: Column[] = [];
+  archiveCols: Column[] = [];
 
   // verifyValue(): boolean {
   //   let showAddButton = true;
@@ -61,13 +62,21 @@ export class EmployeeListComponent {
   ngOnInit(): void {
     this.getEmployees();
 
-    this.cols = [
+    this.activeCols = [
       { field: 'EmpId', header: 'Id' },
       { field: 'FullName', header: 'Name' },
       { field: 'Title', header: 'Title' },
       { field: 'Position', header: 'Position' },
       { field: 'StartDate', header: 'Start Date' },
       { field: 'AccessLevel', header: 'Access Level'}
+    ];
+
+    this.archiveCols = [
+      { field: 'EmpId', header: 'Id' },
+      { field: 'FullName', header: 'Name' },
+      { field: 'Title', header: 'Title' },
+      { field: 'Position', header: 'Position' },
+      { field: 'StartDate', header: 'Start Date' }
     ];
   }
 
@@ -101,6 +110,28 @@ export class EmployeeListComponent {
   }
 
   archiveEmployee(employee: Employee): void {
-    console.log("Archive Employee Clicked", employee);
+    console.log("Archive Employee Clicked: ", employee);
+    employee.Archived = true;
+    this.employeeListService.updateEmployee(employee).subscribe({
+      next: (results) => {
+        console.log(results);
+        this.employeeList.map(emp => emp.EmpId == employee.EmpId ? {...emp, Archived: true} : emp);
+        this.employeeListService.updateEmployeeLists(this.employeeList);
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
+  reactivateEmployee(employee: Employee): void {
+    console.log("Reactived Employee: ", employee);
+    employee.Archived = false;
+    this.employeeListService.updateEmployee(employee).subscribe({
+      next: (results) => {
+        console.log(results);
+        this.employeeList.map(emp => emp.EmpId == employee.EmpId ? {...emp, Archived: false} : emp);
+        this.employeeListService.updateEmployeeLists(this.employeeList);
+      },
+      error: (err) => console.log(err),
+    });
   }
 }
