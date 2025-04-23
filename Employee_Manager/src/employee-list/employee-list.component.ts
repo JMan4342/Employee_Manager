@@ -48,6 +48,7 @@ export class EmployeeListComponent {
   modalVisible: boolean = false;
   modalShown: number = 0;
   formState: string = '';
+  loading: boolean = true;
 
   activeCols: Column[] = [];
   archiveCols: Column[] = [];
@@ -87,6 +88,7 @@ export class EmployeeListComponent {
       next: (results) => {
         this.employeeList = results;
         console.log(this.employeeList);
+        this.loading = false;
         this.employeeListService.updateEmployeeLists(this.employeeList);
       },
       error: (err) => console.log(err),
