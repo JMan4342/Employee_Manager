@@ -5,6 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { Table, TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -27,6 +28,7 @@ interface Column {
     ButtonModule,
     DialogModule,
     TableModule,
+    TooltipModule,
     CommonModule,
     FormsModule,
     EmployeeFormComponent,
