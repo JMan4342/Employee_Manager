@@ -37,11 +37,11 @@ interface Column {
   styleUrl: './employee-list.component.css',
 })
 export class EmployeeListComponent {
+  employeeList = this.employeeListService.employeeListSig;
   activeEmployeeList = this.employeeListService.activeEmployeesSig;
   archivedEmployeeList = this.employeeListService.archivedEmployeesSig;
 
   editEmployee: Employee = new Employee();
-  employeeList: Employee[] = [];
   // searchTerm: string | undefined = undefined;
   activeValue: number = 0;
   value: number = 0;
@@ -86,10 +86,10 @@ export class EmployeeListComponent {
   getEmployees(): void {
     this.employeeListService.getEmployees().subscribe({
       next: (results) => {
-        this.employeeList = results;
-        console.log(this.employeeList);
+        // this.employeeList = results;
+        // console.log(this.employeeList);
         this.loading = false;
-        this.employeeListService.updateEmployeeLists(this.employeeList);
+        this.employeeListService.updateEmployeeLists(results);
       },
       error: (err) => console.log(err),
     });
@@ -119,10 +119,10 @@ export class EmployeeListComponent {
     this.employeeListService.updateEmployee(employee).subscribe({
       next: (results) => {
         console.log(results);
-        this.employeeList.map((emp) =>
+        this.employeeList().map((emp) =>
           emp.EmpId == employee.EmpId ? { ...emp, Archived: true } : emp
         );
-        this.employeeListService.updateEmployeeLists(this.employeeList);
+        this.employeeListService.updateEmployeeLists(this.employeeList());
       },
       error: (err) => console.log(err),
     });
@@ -134,10 +134,10 @@ export class EmployeeListComponent {
     this.employeeListService.updateEmployee(employee).subscribe({
       next: (results) => {
         console.log(results);
-        this.employeeList.map((emp) =>
+        this.employeeList().map((emp) =>
           emp.EmpId == employee.EmpId ? { ...emp, Archived: false } : emp
         );
-        this.employeeListService.updateEmployeeLists(this.employeeList);
+        this.employeeListService.updateEmployeeLists(this.employeeList());
       },
       error: (err) => console.log(err),
     });

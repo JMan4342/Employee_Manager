@@ -27,7 +27,7 @@ export class LoginService {
 
   addUserLogin(login: Login): Observable<any> {
     let body = {
-      EmpId: null,
+      EmpId: login.EmpId,
       Username: login.Username,
       Password: login.Password,
       AccessLevel: login.AccessLevel,

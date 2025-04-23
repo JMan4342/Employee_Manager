@@ -16,6 +16,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { EmployeeListService } from '../../employee-list.service';
 import { Login } from '../../../shared/classes/login';
 import { LoginService } from '../../../login/login.service';
+import { sortBy as _sortBy } from 'lodash';
 
 @Component({
   selector: 'app-employee-form',
@@ -37,6 +38,8 @@ export class EmployeeFormComponent implements OnChanges {
   @Input() inEmployee: Employee = new Employee();
   @Output() outModalState = new EventEmitter<number>();
   @Output() outModalVisible = new EventEmitter<boolean>();
+
+  employeeList = this.employeeListService.employeeListSig;
 
   employee: Employee = new Employee();
   login: Login = new Login();
@@ -95,8 +98,13 @@ export class EmployeeFormComponent implements OnChanges {
     username = this.employee.FirstName?.slice(0, 3) + this.employee.LastName;
     username = username.toLowerCase();
 
+    let sortedEmpList = _sortBy(this.employeeList(), 'EmpId');
+    let lastEmployee = sortedEmpList[sortedEmpList.length - 1];
+
+    this.employee.EmpId = lastEmployee.EmpId ? lastEmployee.EmpId + 1 : 1;
+
     this.login = {
-      EmpId: null,
+      EmpId: this.employee.EmpId,
       Username: username,
       Password: 'demo123',
       AccessLevel: this.employee.AccessLevel,

@@ -7,6 +7,7 @@ import { Employee } from '../shared/classes/employee';
   providedIn: 'root',
 })
 export class EmployeeListService {
+  employeeListSig = signal<Employee[]>([]);
   activeEmployeesSig = signal<Employee[]>([]);
   archivedEmployeesSig = signal<Employee[]>([]);
 
@@ -84,6 +85,7 @@ export class EmployeeListService {
     let activeEmployees = employees.filter(x => x.Archived == false);
     let archivedEmployees = employees.filter(x => x.Archived == true);
 
+    this.employeeListSig.set(employees);
     this.activeEmployeesSig.set(activeEmployees);
     this.archivedEmployeesSig.set(archivedEmployees);
   }
