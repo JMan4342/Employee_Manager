@@ -8,8 +8,10 @@
   <p-tabpanels>
     <p-tabpanel value="0">
       <p-table
+        #active
         [columns]="activeCols"
         [value]="activeEmployeeList()"
+        [globalFilterFields]="['EmpId', 'FullName']"
         [tableStyle]="{ 'min-width': '50rem' }"
       >
         <ng-template #header let-columns>
@@ -27,7 +29,7 @@
                 <input
                   type="text"
                   pInputText
-                  [(ngModel)]="searchTerm"
+                  (input)="onGlobalFilter(active, $event)"
                   placeholder="Search"
                 />
               </div>
@@ -74,8 +76,10 @@
     </p-tabpanel>
     <p-tabpanel value="1">
       <p-table
+        #archive
         [columns]="archiveCols"
         [value]="archivedEmployeeList()"
+        [globalFilterFields]="['EmpId', 'FullName']"
         [tableStyle]="{ 'min-width': '50rem' }"
       >
         <ng-template #header let-columns>
@@ -88,7 +92,7 @@
                 <input
                   type="text"
                   pInputText
-                  [(ngModel)]="searchTerm"
+                  (input)="onGlobalFilter(archive, $event)"
                   placeholder="Search"
                 />
               </div>
