@@ -36,6 +36,7 @@ export class EmployeeListService {
       Title: employee.Title,
       Archived: employee.Archived,
       StartDate: employee.StartDate,
+      Department: employee.Department
     };
 
     return this.http
@@ -61,6 +62,7 @@ export class EmployeeListService {
       Title: employee.Title,
       Archived: employee.Archived,
       StartDate: employee.StartDate,
+      Department: employee.Department
     };
 
     return this.http

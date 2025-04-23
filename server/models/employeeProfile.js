@@ -35,6 +35,9 @@ const EmployeeProfileSchema = mongoose.Schema ({
   },
   StartDate: {
     type: Date,
+  },
+  Department: {
+    type: String
   }
 });
 

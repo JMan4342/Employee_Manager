@@ -78,6 +78,10 @@ employeeProfileRouter.put("/updateEmployeeProfile/:id", async (req, res) => {
     const id = req?.params?.id;
     const employeeProfile = req.body;
     const query = { EmpId: id };
+
+    // TEMPORARY UPDATE ID FOR FIXES
+    // const query = {_id: new ObjectId(id)};
+
     const result = await employeeProfileCollection.updateOne(query, { $set: employeeProfile });
 
     if (result && result.matchedCount) {

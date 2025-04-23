@@ -54,6 +54,14 @@ export class EmployeeFormComponent implements OnChanges {
     'Senior Associate',
     'Associate',
   ];
+  tempDepartment: string[] = [
+    'Executive',
+    'HR',
+    'IT',
+    'Marketing',
+    'Operations',
+    'Sales'
+  ]
 
   constructor(
     private employeeListService: EmployeeListService,
@@ -92,7 +100,7 @@ export class EmployeeFormComponent implements OnChanges {
       Username: username,
       Password: 'demo123',
       AccessLevel: this.employee.AccessLevel,
-      ITAccess: this.employee.Position == 'IT' ? true : false,
+      ITAccess: this.employee.Department == 'IT' ? true : false,
     };
 
     console.log('Login Info: ', this.login);
