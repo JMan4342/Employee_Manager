@@ -75,11 +75,12 @@ employeeProfileRouter.post("/addEmployeeProfile", async (req, res) => {
 
 employeeProfileRouter.put("/updateEmployeeProfile/:id", async (req, res) => {
   try {
-    const id = req?.params?.id;
-    const employeeProfile = req.body;
+    const id = parseInt(req?.params?.id);
     const query = { EmpId: id };
+    const employeeProfile = req.body;
 
     // TEMPORARY UPDATE ID FOR FIXES
+    // const id = req?.params?.id;
     // const query = {_id: new ObjectId(id)};
 
     const result = await employeeProfileCollection.updateOne(query, { $set: employeeProfile });

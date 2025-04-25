@@ -66,9 +66,11 @@ export class EmployeeListService {
       Department: employee.Department
     };
 
+    let employeeId = employee.EmpId?.toString();
+
     return this.http
       .put(
-        `${this.apiUrl}api/employeeProfiles/updateEmployeeProfile/${employee.EmpId}`,
+        `${this.apiUrl}api/employeeProfiles/updateEmployeeProfile/${employeeId}`,
         employeeBody,
         {
           responseType: 'text',

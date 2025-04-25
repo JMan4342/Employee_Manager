@@ -116,6 +116,8 @@ export class EmployeeFormComponent implements OnChanges {
     this.employeeListService.addEmployee(this.employee).subscribe({
       next: (results) => {
         console.log(results);
+        this.employeeList().push(this.employee);
+        this.employeeListService.updateEmployeeLists(this.employeeList());
         this.employee = new Employee();
         this.createEmpLogin();
         this.closeModal();
