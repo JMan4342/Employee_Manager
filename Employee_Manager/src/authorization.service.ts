@@ -12,7 +12,7 @@ export class AuthorizationService {
 
   verifyAuthorization(): boolean {
     let authorized = false;
-    if (localStorage.getItem('Employee Token') && localStorage.getItem('Employee Token') != null) {
+    if (localStorage.getItem('Employee Token') && localStorage.getItem('Employee Token') != null && localStorage.getItem('Employee Token') != undefined) {
       authorized = true;
     };
     

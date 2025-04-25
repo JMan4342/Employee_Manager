@@ -44,4 +44,15 @@ export class LoginService {
         })
       );
   }
+
+  getUserProfile(id: number): Observable<any> {
+    return this.http
+      .get(`${this.apiUrl}api/employeeProfiles/getEmployeeProfile/${id}`)
+      .pipe(
+        map((result) => {
+          console.log('User Profile: ', result)
+          return result;
+        })
+      );
+  }
 }

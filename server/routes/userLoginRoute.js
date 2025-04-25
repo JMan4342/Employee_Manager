@@ -2,7 +2,7 @@ var dotenv = require("dotenv");
 const express = require("express");
 const mongodb = require("mongodb");
 const { MongoClient, ObjectId } = require("mongodb");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 const UserLogin = require("../models/userLogin");
 
 if (process.env.NODE_ENV != "production") {
@@ -61,7 +61,9 @@ userLoginRouter.post("/addUserLogin", async (req, res) => {
     const result = await userLoginCollection.insertOne(userLogin);
 
     if (result?.acknowledged) {
-      res.status(201).send(`Created a new user login: ID ${result.insertedId}.`);
+      res
+        .status(201)
+        .send(`Created a new user login: ID ${result.insertedId}.`);
     } else {
       res.status(500).send("Failed to create a new user login.");
     }
@@ -74,24 +76,30 @@ userLoginRouter.post("/addUserLogin", async (req, res) => {
 });
 
 userLoginRouter.post("/login", async (req, res) => {
-    const query = { Username: req.body.Username, Password: req.body.Password };
-    const user = await userLoginCollection.findOne(query);
-    if (!user) {
-        return res.status(422).send("Incorrect username or password" );
-    } else if (user && user.AccessLevel < 3 && !user.ITAccess) {
-        return res.status(422).send("Not authorized to access");
-    } else {
-        const token = jwt.sign({ id: user._id, username: user.Username }, 'secretsquirrel');
-        res.status(200).send(token);
-    }
-})
+  const query = { Username: req.body.Username, Password: req.body.Password };
+  const user = await userLoginCollection.findOne(query);
+  if (!user) {
+    return res.status(422).send("Incorrect username or password");
+  } else if (user && user.AccessLevel < 3 && !user.ITAccess) {
+    return res.status(422).send("Not authorized to access");
+  } else {
+    console.log(user);
+    const token = jwt.sign(
+      { id: user._id, username: user.Username },
+      "secretsquirrel"
+    );
+    res.status(200).send({Token: token, EmpId: user.EmpId});
+  }
+});
 
 userLoginRouter.put("/updateUserLogin/:id", async (req, res) => {
   try {
     const id = req?.params?.id;
     const userLogin = req.body;
     const query = { _id: new ObjectId(id) };
-    const result = await userLoginCollection.updateOne(query, { $set: userLogin });
+    const result = await userLoginCollection.updateOne(query, {
+      $set: userLogin,
+    });
 
     if (result && result.matchedCount) {
       res.status(200).send(`Updated a user login: ID ${id}.`);

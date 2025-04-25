@@ -41,7 +41,8 @@ employeeProfileRouter.get("/getEmployeeProfiles", async (_req, res) => {
 
 employeeProfileRouter.get("/getEmployeeProfile/:id", async (req, res) => {
   try {
-    const id = req?.params?.id;
+    // const id = req?.params?.id;
+    const id = parseInt(req?.params?.id);
     const query = { EmpId: id };
     const employeeProfile = await employeeProfileCollection.findOne(query);
 
