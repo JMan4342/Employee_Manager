@@ -7,6 +7,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { LoginService } from './login.service';
+import { Employee } from '../shared/classes/employee';
 
 @Component({
   selector: 'app-login',
@@ -72,6 +73,18 @@ export class LoginComponent implements OnInit {
     this.loginService.getUserProfile(id).subscribe({
       next: (results) => {
         console.log(results);
+        let user = new Employee();
+        user = results;
+        if (user.AccessLevel) {
+          localStorage.setItem('UserAccessLevel', user.AccessLevel.toString());
+        };
+        if (user.Department) {
+          localStorage.setItem('UserItAccess', user.Department);
+        };
+        if (user.FullName) {
+          localStorage.setItem('UserFullName', user.FullName);
+        };
+        this.loginService.setLoggedInUser();
       },
       error: (err) => {
         console.log(err);

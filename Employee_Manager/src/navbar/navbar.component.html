@@ -3,6 +3,7 @@
   </ng-template>
   <ng-template #end>
     <div class="flex items-center gap-2">
+      <span class="mx-1"><b>{{loggedUser()?.FullName}}</b></span>
       <p-menu #menu [model]="avatarMenuItems" [popup]="true" />
       <p-avatar
         icon="fa-solid fa-user"

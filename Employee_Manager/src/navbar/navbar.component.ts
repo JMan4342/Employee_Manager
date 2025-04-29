@@ -6,6 +6,8 @@ import { Menubar } from 'primeng/menubar';
 import { Menu } from 'primeng/menu';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
+import { LoginService } from '../login/login.service';
+import { User } from '../shared/classes/user';
 
 @Component({
   selector: 'app-navbar',
@@ -15,12 +17,17 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit{
+  loggedUser = this.loginService.loggedUserSig;
+
   navbarItems: MenuItem[] | undefined;
   avatarMenuItems: MenuItem[] | undefined;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {
+    // this.loginService.setLoggedInUser();
+  }
 
   ngOnInit(): void {
+    this.loginService.setLoggedInUser();
     this.navbarItems = [
       {
         label: 'Home',
@@ -43,6 +50,9 @@ export class NavbarComponent implements OnInit{
         icon: 'fa-solid fa-arrow-right-from-bracket',
         command: () => {
           localStorage.removeItem('Employee Token');
+          localStorage.removeItem('UserAccessLevel');
+          localStorage.removeItem('UserItAccess');
+          localStorage.removeItem('UserFullName');
           this.router.navigate(['/login']);
         }
       }

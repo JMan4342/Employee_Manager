@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Login } from '../shared/classes/login';
+import { Employee } from '../shared/classes/employee';
+import { User } from '../shared/classes/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
+  loggedUserSig = signal<User | undefined>(undefined);
+
   private apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) {}
@@ -54,5 +58,16 @@ export class LoginService {
           return result;
         })
       );
+  }
+
+  setLoggedInUser(): void {
+    let loggedUser = new User();
+    loggedUser = {
+      AccessLevel: Number(localStorage.getItem('UserAccessLevel')), 
+      ITAccess: localStorage.getItem('UserItAccess') == 'IT' ? true : false, 
+      FullName: localStorage.getItem('UserFullName')
+    };
+    this.loggedUserSig.set(loggedUser);
+    console.log(this.loggedUserSig());
   }
 }
