@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeFormComponent } from './modals/employee-form/employee-form.component';
 import { EmployeeListService } from './employee-list.service';
 import { Employee } from '../shared/classes/employee';
+import { LoginService } from '../login/login.service';
 
 interface Column {
   field: string;
@@ -37,6 +38,7 @@ interface Column {
   styleUrl: './employee-list.component.css',
 })
 export class EmployeeListComponent {
+  loggedUser = this.loginService.loggedUserSig;
   employeeList = this.employeeListService.employeeListSig;
   activeEmployeeList = this.employeeListService.activeEmployeesSig;
   archivedEmployeeList = this.employeeListService.archivedEmployeesSig;
@@ -60,7 +62,7 @@ export class EmployeeListComponent {
   //   };
   //   return showAddButton;
   // }
-  constructor(private employeeListService: EmployeeListService) {}
+  constructor(private employeeListService: EmployeeListService, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.getEmployees();
@@ -141,6 +143,14 @@ export class EmployeeListComponent {
       },
       error: (err) => console.log(err),
     });
+  }
+
+  deleteEmployee(employee: Employee): void {
+    console.log('Deleted Employee: ', employee);
+  }
+
+  resetPassword(employee: Employee): void {
+    console.log('Password Reset: ', employee);
   }
 
   onGlobalFilter(table: Table, event: Event) {

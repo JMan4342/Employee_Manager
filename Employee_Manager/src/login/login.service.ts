@@ -64,8 +64,9 @@ export class LoginService {
     let loggedUser = new User();
     loggedUser = {
       AccessLevel: Number(localStorage.getItem('UserAccessLevel')), 
-      ITAccess: localStorage.getItem('UserItAccess') == 'IT' ? true : false, 
-      FullName: localStorage.getItem('UserFullName')
+      ITAccess: localStorage.getItem('UserDept') == 'IT' ? true : false, 
+      FullName: localStorage.getItem('UserFullName'),
+      HRAccess: localStorage.getItem('UserDept') == 'HR' ? true : false
     };
     this.loggedUserSig.set(loggedUser);
     console.log(this.loggedUserSig());

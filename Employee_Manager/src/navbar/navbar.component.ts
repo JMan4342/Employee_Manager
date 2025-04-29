@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit{
         command: () => {
           localStorage.removeItem('Employee Token');
           localStorage.removeItem('UserAccessLevel');
-          localStorage.removeItem('UserItAccess');
+          localStorage.removeItem('UserDept');
           localStorage.removeItem('UserFullName');
           this.router.navigate(['/login']);
         }

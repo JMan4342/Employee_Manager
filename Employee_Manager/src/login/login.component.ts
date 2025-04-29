@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('UserAccessLevel', user.AccessLevel.toString());
         };
         if (user.Department) {
-          localStorage.setItem('UserItAccess', user.Department);
+          localStorage.setItem('UserDept', user.Department);
         };
         if (user.FullName) {
           localStorage.setItem('UserFullName', user.FullName);
