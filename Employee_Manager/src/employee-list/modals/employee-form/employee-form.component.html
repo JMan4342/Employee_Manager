@@ -39,6 +39,7 @@
         id="position"
         [options]="tempPosition"
         [(ngModel)]="employee.Position"
+        (onChange)="updateAccessLevel(employee.Position)"
         placeholder="Select a Position"
         appendTo="body"
         class="w-full md:w-56"
@@ -63,10 +64,10 @@
   <!-- <p-select [options]="tempManager" [(ngModel)]="employee.Manager" placeholder="Select Manager" appendTo="body" class="w-full md:w-56" /> -->
   <div class="row">
     <div class="col-12 col-md-6 my-1">
-      <label for="manager">Manager</label>
+      <label for="department">Department</label>
       <br />
       <p-select
-        id="manager"
+        id="department"
         [options]="tempDepartment"
         [(ngModel)]="employee.Department"
         placeholder="Select Department"
@@ -88,7 +89,7 @@
     </div>
   </div>  
   <div class="row">
-    <div class="col-12 col-md-6 my-1">
+    <!-- <div class="col-12 col-md-6 my-1">
       <label for="accessLevel">Access Level</label>
       <br />
       <p-select
@@ -99,7 +100,7 @@
         appendTo="body"
         class="w-full md:w-56"
       />
-    </div>
+    </div> -->
     <div class="col-12 col-md-6 my-1">
       <label for="startDate">Start Date</label>
       <br />

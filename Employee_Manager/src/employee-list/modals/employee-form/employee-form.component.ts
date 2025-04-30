@@ -48,8 +48,6 @@ export class EmployeeFormComponent implements OnChanges {
   tempAccessLvl: number[] = [1, 2, 3, 4, 5, 6];
   tempManager: string[] = ['Davis, Tom', 'Helen, Pam', 'Smith, Carol'];
   tempPosition: string[] = [
-    'IT',
-    'HR',
     'President',
     'Vice President',
     'Manager',
@@ -63,8 +61,8 @@ export class EmployeeFormComponent implements OnChanges {
     'IT',
     'Marketing',
     'Operations',
-    'Sales'
-  ]
+    'Sales',
+  ];
 
   constructor(
     private employeeListService: EmployeeListService,
@@ -157,6 +155,27 @@ export class EmployeeFormComponent implements OnChanges {
       },
       error: (err) => console.log(err),
     });
+  }
+
+  updateAccessLevel(position?: string): void {
+    if (position == 'President') {
+      this.employee.AccessLevel = 6;
+    }
+    if (position == 'Vice President') {
+      this.employee.AccessLevel = 5;
+    }
+    if (position == 'Manager') {
+      this.employee.AccessLevel = 4;
+    }
+    if (position == 'Supervisor') {
+      this.employee.AccessLevel = 3;
+    }
+    if (position == 'Senior Associate') {
+      this.employee.AccessLevel = 2;
+    }
+    if (position == 'Associate') {
+      this.employee.AccessLevel = 1;
+    }
   }
 
   closeModal(): void {
