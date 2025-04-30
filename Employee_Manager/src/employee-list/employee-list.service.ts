@@ -37,7 +37,8 @@ export class EmployeeListService {
       Title: employee.Title,
       Archived: employee.Archived,
       StartDate: employee.StartDate,
-      Department: employee.Department
+      Department: employee.Department,
+      Username: employee.Username
     };
 
     return this.http

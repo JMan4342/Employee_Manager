@@ -95,6 +95,9 @@ export class EmployeeFormComponent implements OnChanges {
     let username = '';
     username = this.employee.FirstName?.slice(0, 3) + this.employee.LastName;
     username = username.toLowerCase();
+    this.verifyDupUsername();
+
+    // this.employee.Username = username;
 
     let sortedEmpList = _sortBy(this.employeeList(), 'EmpId');
     let lastEmployee = sortedEmpList[sortedEmpList.length - 1];
@@ -103,7 +106,7 @@ export class EmployeeFormComponent implements OnChanges {
 
     this.login = {
       EmpId: this.employee.EmpId,
-      Username: username,
+      Username: this.employee.Username,
       Password: 'demo123',
       AccessLevel: this.employee.AccessLevel,
       ITAccess: this.employee.Department == 'IT' ? true : false,
@@ -176,6 +179,29 @@ export class EmployeeFormComponent implements OnChanges {
     if (position == 'Associate') {
       this.employee.AccessLevel = 1;
     }
+  }
+
+  verifyDupUsername(): void {
+    let username = '';
+    username = this.employee.FirstName?.slice(0, 3) + this.employee.LastName;
+    username = username.toLowerCase();
+
+    if (this.employeeList().filter(x => x.Username?.replace(/\d+/g, '').trim() == username).length > 0) {
+      console.log(this.employeeList().filter(x => x.Username?.replace(/\d+/g, '').trim() == username));
+      let tempDupList = this.employeeList().filter(x => x.Username?.replace(/\d+/g, '').trim() == username);
+      tempDupList = _sortBy(tempDupList, 'Username');
+
+      let lastDupName = tempDupList[tempDupList.length - 1].Username;
+      let lastInstanceString = lastDupName?.slice(username.length);
+      let lastInstanceNum = Number(lastInstanceString);
+      let nextInstance = (lastInstanceNum + 1).toString();
+      let newUsername = username + nextInstance;
+      console.log(newUsername);
+
+      this.employee.Username = newUsername;
+    } else {
+      this.employee.Username = username;
+    };
   }
 
   closeModal(): void {

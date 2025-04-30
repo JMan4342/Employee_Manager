@@ -10,6 +10,7 @@ export class Employee {
     Archived: boolean = false;
     StartDate!: Date;
     Department: string | undefined = undefined;
+    Username: string | undefined = '';
 
     constructor() {
     }

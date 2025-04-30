@@ -38,6 +38,9 @@ const EmployeeProfileSchema = mongoose.Schema ({
   },
   Department: {
     type: String
+  },
+  Username: {
+    type: String
   }
 });
 
