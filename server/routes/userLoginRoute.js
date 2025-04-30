@@ -94,9 +94,14 @@ userLoginRouter.post("/login", async (req, res) => {
 
 userLoginRouter.put("/updateUserLogin/:id", async (req, res) => {
   try {
-    const id = req?.params?.id;
+    const id = parseInt(req?.params?.id);
+    const query = { EmpId: id };
+
+    // TEMPORARY UPDATE ID FOR FIXES 
+    // const id = req?.params?.id;
+    // const query = { _id: new ObjectId(id) };
+
     const userLogin = req.body;
-    const query = { _id: new ObjectId(id) };
     const result = await userLoginCollection.updateOne(query, {
       $set: userLogin,
     });

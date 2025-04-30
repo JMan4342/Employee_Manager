@@ -1,9 +1,9 @@
 export class Employee {
-    EmpId: number | null = null;
+    EmpId: number = 0;
     FirstName: string = '';
     LastName: string = '';
     FullName: string = '';
-    AccessLevel: number | null = null;
+    AccessLevel: number = 0;
     Manager: string | undefined = undefined;
     Position: string | undefined = undefined;
     Title: string | undefined = undefined;

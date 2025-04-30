@@ -54,7 +54,27 @@ export class LoginService {
       .get(`${this.apiUrl}api/employeeProfiles/getEmployeeProfile/${id}`)
       .pipe(
         map((result) => {
-          console.log('User Profile: ', result)
+          console.log('User Profile: ', result);
+          return result;
+        })
+      );
+  }
+
+  updateEmpLogin(empId: number, accessLevel: number): Observable<any> {
+    let loginBody = {
+      AccessLevel: accessLevel,
+    };
+
+    return this.http
+      .put(
+        `${this.apiUrl}api/userLogins/updateUserLogin/${empId}`,
+        loginBody,
+        {
+          responseType: 'text',
+        }
+      )
+      .pipe(
+        map((result) => {
           return result;
         })
       );
@@ -63,10 +83,10 @@ export class LoginService {
   setLoggedInUser(): void {
     let loggedUser = new User();
     loggedUser = {
-      AccessLevel: Number(localStorage.getItem('UserAccessLevel')), 
-      ITAccess: localStorage.getItem('UserDept') == 'IT' ? true : false, 
+      AccessLevel: Number(localStorage.getItem('UserAccessLevel')),
+      ITAccess: localStorage.getItem('UserDept') == 'IT' ? true : false,
       FullName: localStorage.getItem('UserFullName'),
-      HRAccess: localStorage.getItem('UserDept') == 'HR' ? true : false
+      HRAccess: localStorage.getItem('UserDept') == 'HR' ? true : false,
     };
     this.loggedUserSig.set(loggedUser);
     console.log(this.loggedUserSig());
