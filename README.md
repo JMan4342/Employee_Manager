@@ -14,8 +14,6 @@
 
 - [Contribution](#contribution)
 
-- [Extras](#extras)
-
 - [Questions](#questions)
 
 ---
@@ -59,7 +57,7 @@ There are no tests installed for the application.
 
 ## **Contribution**
 
-If you are looking to contribute the Pizza Shop Manager app, you can find its repo at https://github.com/JMan4342/Employee_Manager.
+If you are looking to contribute the Employee Manager app, you can find its repo at https://github.com/JMan4342/Employee_Manager.
 
 ---
 
